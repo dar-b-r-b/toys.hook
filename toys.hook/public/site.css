@@ -13,9 +13,10 @@ margin-left: 3em;
 }
 #aboutme, #contacts,#masterclass, #product, #delivery, #basket{
 color:black;
-/* margin-top:1.5em; */
+font-family: 'Montserrat', sans-serif;
 height:100%;
 }
+
  #logo{
 width: 8em;
 height:8em;
@@ -28,6 +29,7 @@ grid-template-rows: 1fr 1fr;
 grid-gap: 2vw;
 margin-top: 1.5em;
 text-align: center;
+font-family: 'Montserrat', sans-serif;
 }
 .ms-3 {
     margin-left: 3em;
@@ -48,6 +50,7 @@ text-align: center;
     display: grid;
     grid-template-columns: 3fr 1fr 1fr 1fr;
     margin-bottom: 1.5em;
+    font-family: 'Montserrat', sans-serif;
 }
 #footer-logo{
     width: 4em;
