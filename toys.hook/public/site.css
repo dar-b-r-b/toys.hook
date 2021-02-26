@@ -11,7 +11,7 @@ grid-gap: 2vw;
 margin-top: 1em;
 margin-left: 3em;
 }
-#aboutme, #contacts,#masterclass, #product, #delivery, #basket{
+#aboutme, #contacts,#masterclass, #product, #delivery, #wishlist{
 color:black;
 font-family: 'Montserrat', sans-serif;
 height:100%;
@@ -31,6 +31,9 @@ margin-top: 1.5em;
 text-align: center;
 font-family: 'Montserrat', sans-serif;
 }
+.card-text{
+    font-size:large;
+}
 .ms-3 {
     margin-left: 3em;
   }
@@ -41,7 +44,9 @@ font-family: 'Montserrat', sans-serif;
     margin-top: 2em;
     }
 #masterclass-block{
-    background-color: rgb(252, 252, 252);
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    background-color: rgb(255, 255, 255);
     height: 500px;
     width: 100%;
     margin-top: 2em;
@@ -68,4 +73,17 @@ height: 3em;
 }
 #source{
     padding-top:1em;
+}
+h1{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+    font-size:xxx-large;
+}
+p{
+    font-family: 'Montserrat', sans-serif;
+    font-size:x-large;
+}
+.text{
+    padding-left: 7em;
+    padding-top: 7em;
 }
