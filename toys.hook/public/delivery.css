@@ -1,0 +1,13 @@
+#delivery-block{
+    display:grid;
+    grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
+    grid-template-rows: 2fr 1fr 3fr;
+    background-color:#f2f2f2;
+    height: 600px;
+    width: 100%;
+    margin-top: 2em;
+    }
+#delivery{
+    grid-column-start: 2;
+    grid-column-end: 5;
+}

@@ -1,0 +1,15 @@
+#product-block{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 2vw;
+    margin-top: 1.5em;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    }
+.card-text{
+     font-size:large;
+    }
+.ms-3 {
+     margin-left: 3em;
+      }
