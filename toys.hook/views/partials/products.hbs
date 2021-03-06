@@ -1,13 +1,22 @@
 <div id="product-block">
     <div id="filter">
-        <input type="text" class="form-control" id="search">
+        <div class="search-icon"><input type="text" class="form-control" id="search" placeholder="Хочу найти"></div>
         <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="sort">
             <option selected>Сортировать</option>
-            <option value="1">По убыванию цены</option>
-            <option value="2">По возрастанию цены</option>
-            <option value="3">По убыванию размера</option>
-            <option value="3">По возрастанию размера</option>
+            <option value="1">по убыванию цены</option>
+            <option value="2">по возрастанию цены</option>
+            <option value="3">по убыванию размера</option>
+            <option value="3">по возрастанию размера</option>
         </select>
+        <div id="size">
+        <span>Размер</span>
+        <div id="interval">
+            <input type="text" id="minPrice" class="form-control">
+            <span style="text-align: center;">до</span>
+            <input type="text" id="maxPrice" class="form-control">
+            <span>см</span>
+        </div>
+</div>
     </div>
     <div id="product-list">
         <div id="toy" class="card" style="width: 15rem;">
