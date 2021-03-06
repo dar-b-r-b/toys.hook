@@ -1,13 +1,37 @@
 #delivery-block{
     display:grid;
     grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
-    grid-template-rows: 2fr 1fr 3fr;
+    grid-template-rows: 2fr 1fr 5fr;
     background-color:#f2f2f2;
-    height: 600px;
+    height: 550px;
     width: 100%;
-    margin-top: 2em;
+    color: #333333;
+    font-family: 'Cormorant Garamond', serif;
     }
-#delivery{
+#delivery, #taxi, #description-taxi{
     grid-column-start: 2;
-    grid-column-end: 5;
+    grid-column-end: 3;
+}
+.position{
+   display:grid;
+   grid-template-columns: 1fr 1fr 1fr;
+   grid-template-rows: 1fr 1fr 1fr;
+}
+#taxiimg, #postboximg, #shopimg{
+    grid-column-start: 2;
+    grid-row-start: 3;
+    padding-left: 1em;
+}
+.text-position{
+    text-align:center;
+    padding-top: 1em;
+}
+.font{
+    font-size: 30px;
+}
+.description-font{
+   font-size: 17px;
+   padding-left:1em;
+   padding-top:1em;
+   text-align: center;
 }
