@@ -1,48 +1,40 @@
 <div id="product-block">
     <div id="filter">
-        <div class="search-icon"><input type="text" class="form-control" id="search" placeholder="Хочу найти"></div>
-        <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="sort">
-            <option selected>Сортировать</option>
+        <div class="search-icon"><input type="text" class="form-control" v-model="searchText" id="search" placeholder="Хочу найти"></div>
+        <select class="form-select form-select-sm" aria-label=".form-select-sm example" v-model="sortType" id="sort">
+            <option selected value="0">Сортировать</option>
             <option value="1">по убыванию цены</option>
             <option value="2">по возрастанию цены</option>
             <option value="3">по убыванию размера</option>
-            <option value="3">по возрастанию размера</option>
+            <option value="4">по возрастанию размера</option>
         </select>
-        <div id="size">
-        <span>Размер</span>
-        <div id="interval">
-            <input type="text" id="minPrice" class="form-control">
-            <span style="text-align: center;">до</span>
-            <input type="text" id="maxPrice" class="form-control">
-            <span>см</span>
+        <div class="top">
+            <span>Цена</span>
+            <div id="interval">
+                <input type="text" id="minPrice" class="form-control" v-model="filterPriceMin">
+                <span style="text-align: center;">до</span>
+                <input type="text" id="maxPrice" class="form-control" v-model="filterPriceMax">
+                <span>руб.</span>
+            </div>
+            <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="sort" v-model="filterMaterials">
+                <option selected value="">Материал</option>
+                <option>акрил</option>
+                <option>шерсть</option>
+                <option>хлопок</option>
+            </select>
+            <button type="button" class="btn btn-light center">Сбросить параметры</button>
         </div>
-</div>
     </div>
     <div id="product-list">
-        <div id="toy" class="card" style="width: 15rem;">
+        <div v-for="product in computedProducts" class="card" style="width: 15rem;">
             <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">Типа игрушка</h5>
-                <p class="card-text">Какое-то описание</p>
-                <a href="#">Купить</a>
-            </div>
-        </div>
-
-        <div class="card" style="width: 15rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Типа игрушка</h5>
-                <p class="card-text">Какое-то описание</p>
-                <a href="#">Купить</a>
-            </div>
-        </div>
-
-        <div class="card" style="width: 15rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Типа игрушка</h5>
-                <p class="card-text">Какое-то описание</p>
-                <a href="#">Купить</a>
+                <h5 class="card-title" v-text="product.name"></h5>
+                <p>
+                    <span v-text="product.description.materials"></span>, <span v-text="product.description.size"></span>&nbsp;см
+                </p>
+                <span v-text="product.price"></span>&nbsp;руб.
+                <p class="top"><button type="button" class="btn btn-light">Купить</button></p>
             </div>
         </div>
     </div>
