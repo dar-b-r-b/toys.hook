@@ -10,13 +10,18 @@
         display: grid;
         grid-template-columns: 1fr 3fr 1fr;
     }
-    
     #aboutme, #contacts,#masterclass, #product, #delivery, #wishlist{
     color:black;
     font-family: 'Cormorant Garamond', serif;
     height:100%;
     font-size:20px;
     text-decoration: none;
+    text-decoration: none;
+    background-color: transparent; 
+    border: none;
+    }
+    .outline-none:focus{
+        outline: none;
     }
     
      #logo{

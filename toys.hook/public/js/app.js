@@ -1,6 +1,9 @@
 const App = {
     data() {
         return {
+            wishlist:{
+                modal: null
+            },
             products: [
                 {
                     name: "Мишка",
@@ -36,10 +39,15 @@ const App = {
             filterMaterials: ""
         }
     },
+    mounted(){
+        this.wishlist.modal = new bootstrap.Modal(this.$refs.wishlist);
+        this.wishlist.modal.show();
+    },
+    methods:{
+
+    },
     computed: {
         computedProducts() {
-
-
             let filtered = this.products
                 .filter(x => x.name.toUpperCase().includes(this.searchText.toUpperCase()));
 

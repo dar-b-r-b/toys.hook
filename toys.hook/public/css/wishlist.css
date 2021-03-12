@@ -1,0 +1,78 @@
+#modal{
+    font-family: 'Montserrat', sans-serif;
+    color: #383838;
+}
+#exampleModalLabel{
+    font-weight: bold;
+    margin-left: .5em;
+}
+.modal-header, .modal-footer {
+    border-bottom: none;
+    border-top: none;
+}
+.btn-secondary{
+    background-color:rgb(167, 167, 167);
+    border-color: transparent;
+}
+.btn-secondary:hover{
+    background-color:rgb(146, 146, 146);
+    border-color: transparent; 
+}
+.btn-primary{
+    background-color: #d38c63;
+    border-color: transparent;
+}
+.btn-primary:hover{
+    background-color: #c4845f;
+    border-color: transparent;
+}
+#wishlist-product{
+    display:grid;
+    grid-template-columns: .5fr 7fr .5fr;
+}
+.choice{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr .8fr 1fr;
+    grid-column-start: 2;
+    border-top: 1px solid rgb(90, 90, 90);
+    border-bottom:1px solid rgb(90, 90, 90);
+}
+.wish-name, .wish-count, .wish-price, .wish-num{
+    text-align:center;
+    padding-top: 1.8em;
+    font-size: .7 em;
+    font-weight: bold;
+}
+.wish-del{
+    text-align: center;
+}
+.decr, .incr{
+    text-decoration: none;
+    background-color: transparent; 
+    border: none;
+}
+.decr:focus {
+    outline: none;
+}
+.incr:focus{
+    outline: none;
+}
+.wish-img img{
+    height: 70px;
+    width: 70px;
+    margin-top: .5em;
+    margin-bottom: .5em;
+    border-radius: .2em;
+}
+.wish-del{
+    text-decoration: none;
+    background-color: transparent; 
+    border: none;
+}
+#total{
+    text-align:right;
+    grid-column-start: 2;
+    font-weight: bold;
+    margin-top: 2em;
+}
+
