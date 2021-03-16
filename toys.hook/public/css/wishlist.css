@@ -29,7 +29,6 @@ z-index: 1;
 .wishlist-product{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 10px 15px;
 }
 .outline-none{
   text-decoration: none;
@@ -83,7 +82,15 @@ z-index: 1;
 .del-btn{
   width: 20px;
   height: 20px;
+  
 }
+/* .del:hover{
+visibility: visible;
+} */
 .counter{
   align-items: center;
+}
+
+.collapse {
+  visibility: collapse;
 }

@@ -14,21 +14,21 @@
             </div>
             <div class="wishlist-product">
                 <template v-for="product in wishlist">
-                    <div><img src="image/bear.jpg" height="16" width="16" alt="фотография" class="img-product"></div>
-                    <div class="des-text">
+                    <div @mouseover="product.over=true" @mouseleave="product.over=false"><img src="image/bear.jpg" height="16" width="16" alt="фотография" class="img-product"></div>
+                    <div @mouseover="product.over=true" @mouseleave="product.over=false" class="des-text">
                         <p v-text="product.description.materials + ', ' + product.description.size + ' см'"></p>
                         <h3 class="des-name" v-text="product.name"></h3>
                     </div>
-                    <div class="control-div">
-                        <div class="counter d-flex">
-                            <button class="outline-none" @click="counter--">-</button>
-                            <span v-text="counter"></span>
-                            <button class="outline-none" @click="counter++">+</button>
+                    <div @mouseover="product.over=true" @mouseleave="product.over=false" class="control-div">
+                        <div class="counter d-flex" :class="{collapse: !product.over}">
+                            <button class="outline-none" @click="subtractCount(product)">-</button>
+                            <span v-text="product.count"></span>
+                            <button class="outline-none" @click="product.count++">+</button>
                         </div>
-                        <div class="del d-flex"><button class="outline-none"><img
+                        <div class="del d-flex" :class="{collapse: !product.over}"><button class="outline-none" @click="wishlist.splice(i, 1)"><img
                         src="https://img.icons8.com/ios/50/000000/delete-sign--v1.png" class="del-btn"></button></div>
                         <div class="des-price d-flex">
-                            <span v-text="product.price + ' &#8381'"></span>
+                            <span v-text="product.price*product.count + ' &#8381'"></span>
                         </div>
                     </div>
 

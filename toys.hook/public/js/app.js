@@ -10,7 +10,7 @@ const App = {
                         weight: 54.21,
                         size: 12
                     },
-                    price: 430
+                    price: 430, showButton: false
                 },
                 {
                     name: "зайка",
@@ -36,17 +36,27 @@ const App = {
             filterPriceMax: "",
             filterMaterials: "",
             wishlist: [],
-            counter: 1
         }
     },
     mounted(){
         this.wishlist.push(this.products[0]);
         this.wishlist.push(this.products[1]);
+
+        this.wishlist.forEach(x => x.count = 1);
     },
     methods:{
-// counter(){
-
-// }
+      subtractCount(product){
+          if(product.count !== 1){
+            product.count--;
+          }
+      },
+      resetFilter(){
+        this.searchText= "";
+        this.sortType= 0;
+        this.filterPriceMin= "";
+        this.filterPriceMax= "";
+        this.filterMaterials= "";
+      }
     },
     computed: {
         show: {
