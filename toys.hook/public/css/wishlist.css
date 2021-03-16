@@ -1,78 +1,89 @@
-#modal{
-    font-family: 'Montserrat', sans-serif;
-    color: #383838;
+.slide-fade-enter-active {
+    transition: all 0.3s ease-out;
+  }
+  
+  .slide-fade-leave-active {
+    transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  }
+  
+  .slide-fade-enter-from,
+  .slide-fade-leave-to {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  .fix-right{
+position:fixed;
+height: 100%;
+top:0;
+right:0;
+background-color: rgb(255, 255, 255);
+width:40%;
+z-index: 2;
+  }
+  .overlay{
+    position:absolute;
+  box-shadow: 0 0 0 9999px rgba(0,0,0, 0.3);
+width:100%;
+z-index: 1;
+  }
+.wishlist-product{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px 15px;
 }
-#exampleModalLabel{
-    font-weight: bold;
-    margin-left: .5em;
+.outline-none{
+  text-decoration: none;
+  text-decoration: none;
+  background-color: transparent; 
+  border: none;
 }
-.modal-header, .modal-footer {
-    border-bottom: none;
-    border-top: none;
+.close-btn{
+  width: 30px;
+  height: 30px;
 }
-.btn-secondary{
-    background-color:rgb(167, 167, 167);
-    border-color: transparent;
+.img-close{
+  text-align: right;
+  margin-top: 1em;
+  margin-right: 1em;
+  justify-content: space-between;
 }
-.btn-secondary:hover{
-    background-color:rgb(146, 146, 146);
-    border-color: transparent; 
+.fix-right h2{
+  margin-left:1em;
+  margin-top: .5em;
 }
-.btn-primary{
-    background-color: #d38c63;
-    border-color: transparent;
-}
-.btn-primary:hover{
-    background-color: #c4845f;
-    border-color: transparent;
-}
-#wishlist-product{
-    display:grid;
-    grid-template-columns: .5fr 7fr .5fr;
-}
-.choice{
-    display:grid;
-    grid-template-columns: 1fr 1fr 1fr .8fr 1fr;
-    grid-column-start: 2;
-    border-top: 1px solid rgb(90, 90, 90);
-    border-bottom:1px solid rgb(90, 90, 90);
-}
-.wish-name, .wish-count, .wish-price, .wish-num{
-    text-align:center;
-    padding-top: 1.8em;
-    font-size: .7 em;
-    font-weight: bold;
-}
-.wish-del{
-    text-align: center;
-}
-.decr, .incr{
-    text-decoration: none;
-    background-color: transparent; 
-    border: none;
-}
-.decr:focus {
-    outline: none;
-}
-.incr:focus{
-    outline: none;
-}
-.wish-img img{
-    height: 70px;
-    width: 70px;
-    margin-top: .5em;
-    margin-bottom: .5em;
-    border-radius: .2em;
-}
-.wish-del{
-    text-decoration: none;
-    background-color: transparent; 
-    border: none;
-}
-#total{
-    text-align:right;
-    grid-column-start: 2;
-    font-weight: bold;
-    margin-top: 2em;
+.img-product{
+  margin-left: 2.6em;
+  margin-bottom: 1.5em;
+  margin-top: 1.2em;
+  height: 90px;
+  width: 95px;
 }
 
+.des-text{
+  padding-top: 2em;
+}
+.des-text :first-child{
+  font-size: small;
+  margin-bottom: 0;
+}
+.des-price{
+  grid-column-start: 2;
+  grid-row-start: 2;
+  align-items: center;
+}
+.control-div{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+.del{
+  grid-column-start: 2;
+  align-items: center;
+}
+.del-btn{
+  width: 20px;
+  height: 20px;
+}
+.counter{
+  align-items: center;
+}

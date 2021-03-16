@@ -1,33 +1,42 @@
-<div class="modal fade" id="modal" ref="wishlist" tabindex="-1" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="modalLabel">твой заказ</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                    @click="wishlist.modal.hide()"></button>
+<div id="demo">
+    <transition name="slide-fade">
+        <div class="overlay" v-if="show"></div>
+    </transition>
+
+    <transition name="slide-fade">
+
+        <aside class="fix-right" v-if="show">
+
+            <div class="img-close d-flex">
+                <h2>КОРЗИНА</h2>
+                <button class="outline-none" @click="show=!show"><img
+                        src="https://img.icons8.com/ios/50/000000/delete-sign--v1.png" class="close-btn"></button>
             </div>
-            <div class="modal-body" id="wishlist-product">
-                <div class="choice">
-                    <div class="wish-img"><img src="image/bear.jpg" alt="фотография"></div>
-                    <div class="wish-name">мишка</div>
-                    <div class="wish-count">
-                        <button type="button" class="decr">-</button>
-                        <span class="count">1</span>
-                        <button type="button" class="incr">+</button>
+            <div class="wishlist-product">
+                <template v-for="product in wishlist">
+                    <div><img src="image/bear.jpg" height="16" width="16" alt="фотография" class="img-product"></div>
+                    <div class="des-text">
+                        <p v-text="product.description.materials + ', ' + product.description.size + ' см'"></p>
+                        <h3 class="des-name" v-text="product.name"></h3>
                     </div>
-                    <div class="wish-price">600 руб.</div>
-                    <button type="button" class="wish-del"><img
-                            src="https://img.icons8.com/small/16/000000/delete-sign.png" /></button>
-                </div>
-                <div></div>
-                <div id="total">Сумма: 600 руб.</div>
+                    <div class="control-div">
+                        <div class="counter d-flex">
+                            <button class="outline-none" @click="counter--">-</button>
+                            <span v-text="counter"></span>
+                            <button class="outline-none" @click="counter++">+</button>
+                        </div>
+                        <div class="del d-flex"><button class="outline-none"><img
+                        src="https://img.icons8.com/ios/50/000000/delete-sign--v1.png" class="del-btn"></button></div>
+                        <div class="des-price d-flex">
+                            <span v-text="product.price + ' &#8381'"></span>
+                        </div>
+                    </div>
+
+                </template>
+
+
+
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                    @click="wishlist.modal.hide()">закрыть</button>
-                <button type="button" class="btn btn-primary">заказать</button>
-            </div>
-        </div>
-    </div>
+        </aside>
+    </transition>
 </div>

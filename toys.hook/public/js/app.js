@@ -1,32 +1,30 @@
 const App = {
     data() {
         return {
-            wishlist:{
-                modal: null
-            },
+            showWishlist: true,
             products: [
                 {
-                    name: "Мишка",
+                    name: "мишка",
                     description: {
-                        materials: "Шерсть",
+                        materials: "шерсть",
                         weight: 54.21,
                         size: 12
                     },
                     price: 430
                 },
                 {
-                    name: "Зайка",
+                    name: "зайка",
                     description: {
-                        materials: "Шерсть",
+                        materials: "шерсть",
                         weight: 24.11,
                         size: 22
                     },
                     price: 390
                 },
                 {
-                    name: "Коралина",
+                    name: "коралина",
                     description: {
-                        materials: "Акрил",
+                        materials: "акрил",
                         weight: 24.31,
                         size: 26
                     },
@@ -36,17 +34,30 @@ const App = {
             sortType: 0,
             filterPriceMin: "",
             filterPriceMax: "",
-            filterMaterials: ""
+            filterMaterials: "",
+            wishlist: [],
+            counter: 1
         }
     },
     mounted(){
-        this.wishlist.modal = new bootstrap.Modal(this.$refs.wishlist);
-        this.wishlist.modal.show();
+        this.wishlist.push(this.products[0]);
+        this.wishlist.push(this.products[1]);
     },
     methods:{
+// counter(){
 
+// }
     },
     computed: {
+        show: {
+            get() {
+                return this.showWishlist;
+            },
+            set(value){
+                document.querySelector('body').style.overflowY =  value ? 'hidden' : 'auto';
+                this.showWishlist = value;
+            }
+        },
         computedProducts() {
             let filtered = this.products
                 .filter(x => x.name.toUpperCase().includes(this.searchText.toUpperCase()));
