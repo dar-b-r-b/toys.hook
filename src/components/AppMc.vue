@@ -1,3 +1,20 @@
+<template>
+<div id="masterclass-block">
+    <div class="text">
+        <h1>Упс!</h1>
+        <p1>Пока нет ни одного мастер-класса</p1>
+    </div>
+    <div><img src="image/mc.png" alt="мастер-классы" id="mc"></div>
+</div>
+</template>
+
+<script>
+export default {
+    
+}
+</script>
+
+<style scoped>
 #masterclass-block{
     display: grid;
     grid-template-columns: 1fr 4fr 2fr 1fr;
@@ -22,3 +39,4 @@ p1{
     font-family: 'Cormorant Garamond', serif;
     font-size:24px;
 }
+</style>
