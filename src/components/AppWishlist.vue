@@ -6,7 +6,7 @@
 
     <transition name="slide-fade">
       <aside class="fix-right overflow-auto pb-4" v-if="show">
-        <div class="img-close d-flex">
+        <div class="img-close d-flex mb-3">
           <h2>КОРЗИНА</h2>
           <button class="outline-none" @click="$emit('show-change')">
             <img
@@ -76,7 +76,7 @@
         </div>
 
         <div class="delivery-inform">
-          <h5>информация о доставке</h5>
+          <h4 class="mb-3">информация о доставке</h4>
           <div class="form-horizontal col-11">
             <div class="row">
               <div class="form-group col-12">
@@ -108,24 +108,47 @@
                 <input class="form-control" type="text" id="postcode" />
               </div>
             </div>
-            <h6>способ доставки</h6>
+            <h5 class="pt-3">способ доставки</h5>
             <div class="row">
               <label class="d-block">
-                <input type="checkbox" name="checkbox-1" />
-                <span class="px-1">почта</span>
+                <input
+                  type="radio"
+                  value="400"
+                  name="radio-button"
+                  v-model.number="deliveryCost"
+                />
+                <span class="px-1">почта (400 &#8381;)</span>
               </label>
               <label class="d-block">
-                <input type="checkbox" name="checkbox-2" />
-                <span class="px-1">такси</span>
+                <input
+                  type="radio"
+                  value="300"
+                  name="radio-button"
+                  v-model.number="deliveryCost"
+                />
+                <span class="px-1">такси (300 &#8381;)</span>
               </label>
               <label class="d-block">
-                <input type="checkbox" name="checkbox-3" />
-                <span class="px-1">самовывоз</span>
+                <input
+                  type="radio"
+                  value="0"
+                  name="radio-button"
+                  v-model.number="deliveryCost"
+                />
+                <span class="px-1">самовывоз (бесценно)</span>
               </label>
+              <hr class="my-3" />
+              <div class="row mb-4">
+                <div class="col-8"></div>
+                <div class="col text-end">
+                  <h3 class="col">итого</h3>
+                  <h3 class="col">{{ sum }} &#8381;</h3>
+                </div>
+              </div>
             </div>
             <div class="row">
               <div class="d-flex justify-content-center">
-                <button class="btn btn-light">Сделать заказ</button>
+                <button class="btn">Сделать заказ</button>
               </div>
             </div>
           </div>
@@ -137,11 +160,29 @@
 
 <script>
 export default {
+  data() {
+    return {
+      deliveryCost: 0,
+    };
+  },
+  computed: {
+    sum() {
+      return (
+        this.wishlist.reduce((aggr, x) => aggr + x.count * x.price, 0) +
+        Number(this.deliveryCost)
+      );
+    },
+  },
   props: ["wishlist", "show"],
 };
 </script>
 
 <style scoped>
+.btn {
+  background-color: #eae6e1;
+  color: #333333;
+  font-weight: bold;
+}
 .slide-fade-enter-active {
   transition: all 0.3s ease-out;
 }
@@ -244,8 +285,10 @@ export default {
   grid-template-rows: 4;
 }
 
+h4,
+h2,
 h5 {
-  font-size: 1.5rem;
+  font-weight: bold;
 }
 .delivery-inform h6 {
   margin-top: 1rem;

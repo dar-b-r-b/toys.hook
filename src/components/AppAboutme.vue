@@ -1,5 +1,5 @@
 <template>
-  <div class="container pt-5">
+  <div class="container pt-5" id="about-me-block">
     <div class="row">
       <div class="col"></div>
       <div class="col-5 inform">

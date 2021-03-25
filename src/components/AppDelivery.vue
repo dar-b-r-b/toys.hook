@@ -1,40 +1,46 @@
 <template>
-  <div id="delivery-block">
-    <div id="delivery" class="position">
-      <img src="image/taxi.png" alt="фотография" id="taxiimg" />
-    </div>
-    <div class="position">
-      <img src="image/postbox.png" alt="фотография" id="postboximg" />
-    </div>
-    <div class="position">
-      <img src="image/shop.png" alt="фотография" id="shopimg" />
-    </div>
-    <div id="taxi" class="text-position font">
-      <h2>На такси</h2>
-    </div>
-    <div class="text-position font">
-      <h2>Почтой</h2>
-    </div>
-    <div class="text-position font">
-      <h2>Самовывозом</h2>
-    </div>
-    <div id="description-taxi" class="description-font">
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-        reiciendis velit omnis illo quidem reprehenderit.
-      </p>
-    </div>
-    <div class="description-font">
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-        reiciendis velit omnis illo quidem reprehenderit.
-      </p>
-    </div>
-    <div class="description-font">
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-        reiciendis velit omnis illo quidem reprehenderit.
-      </p>
+  <div class="container-fluid" id="delivery-block">
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-3 text-center">
+        <img src="image/taxi.png" alt="Такси" />
+      </div>
+      <div class="col-3 text-center">
+        <img src="image/postbox.png" alt="Почта" />
+      </div>
+      <div class="col-3 text-center">
+        <img src="image/shop.png" alt="Самовывоз" />
+      </div>
+      <div class="col-2"></div>
+
+      <div class="col-3">
+        <h2>На такси</h2>
+      </div>
+      <div class="col-3">
+        <h2>Почтой</h2>
+      </div>
+      <div class="col-3">
+        <h2>Самовывозом</h2>
+      </div>
+      <div class="col-2"></div>
+      <div class="col-3">
+        <p>
+          Доставка осуществляется в советский, ленинский, кировский,
+          промышленный, районы Самары.
+        </p>
+      </div>
+      <div class="col-3">
+        <p>
+          Доставка осуществляется голубиной почтой только по царской России.
+        </p>
+      </div>
+      <div class="col-3">
+        <p>
+          Также мои игрушки есть в магазине "Твоя полка" по адресу г. Самара,
+          ул. Ленинградская, 55, полочка №46.
+        </p>
+      </div>
+      <div class="col-2"></div>
     </div>
   </div>
 </template>
@@ -44,45 +50,21 @@ export default {};
 </script>
 
 <style scoped>
-#delivery-block {
-  display: grid;
-  grid-template-columns: 1fr 2fr 2fr 2fr 1fr;
-  grid-template-rows: 2fr 1fr 5fr;
-  background-color: #f2f2f2;
-  height: 550px;
-  width: 100%;
+.container-fluid {
+  background-color: #eae6e1;
+  margin: 0;
+  height: 30rem;
+  padding-top: 8rem;
+}
+img {
+  text-align: center;
+}
+h2 {
+  text-align: center;
   color: #333333;
-  font-family: "Cormorant Garamond", serif;
 }
-#delivery,
-#taxi,
-#description-taxi {
-  grid-column-start: 2;
-  grid-column-end: 3;
-}
-.position {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-}
-#taxiimg,
-#postboximg,
-#shopimg {
-  grid-column-start: 2;
-  grid-row-start: 3;
-  padding-left: 1em;
-}
-.text-position {
-  text-align: center;
-  padding-top: 1em;
-}
-.font {
-  font-size: 30px;
-}
-.description-font {
-  font-size: 17px;
-  padding-left: 1em;
-  padding-top: 1em;
-  text-align: center;
+p {
+  text-align: justify;
+  padding: 0 1em;
 }
 </style>

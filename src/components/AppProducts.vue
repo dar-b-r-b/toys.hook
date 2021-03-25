@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid pt-5 pb-5">
+  <div class="container-fluid pt-5 pb-5 px-5" id="product-block">
     <div class="row">
       <div class="col-3 filter">
         <div class="form-horizontal">
@@ -25,10 +25,10 @@
                 id="sort"
               >
                 <option selected value="0">Сортировать</option>
-                <option value="1">по убыванию цены</option>
-                <option value="2">по возрастанию цены</option>
-                <option value="3">по убыванию размера</option>
-                <option value="4">по возрастанию размера</option>
+                <option value="1">По убыванию цены</option>
+                <option value="2">По возрастанию цены</option>
+                <option value="3">По убыванию размера</option>
+                <option value="4">По возрастанию размера</option>
               </select>
             </div>
           </div>
@@ -59,9 +59,9 @@
                 v-model="filterMaterials"
               >
                 <option selected value="">Материал</option>
-                <option>акрил</option>
-                <option>шерсть</option>
-                <option>хлопок</option>
+                <option>Акрил</option>
+                <option>Шерсть</option>
+                <option>Хлопок</option>
               </select>
             </div>
           </div>
@@ -87,14 +87,15 @@
           >
             <img class="card-img-top" alt="..." />
             <div class="card-body">
-              <h5 class="card-title" v-text="product.name"></h5>
-              <p>
+              <h5 class="card-title text-center" v-text="product.name"></h5>
+              <p class="text-center">
                 <span v-text="product.description.materials"></span>,
-                <span v-text="product.description.size"></span>&nbsp;см
+                <span v-text="product.description.size"></span>&nbsp;см <br />
+                <span v-text="product.price"></span>&nbsp;&#8381;
               </p>
-              <span v-text="product.price"></span>&nbsp;руб.
-              <p class="top">
-                <button type="button" class="btn btn-light">Купить</button>
+
+              <p class="text-center">
+                <button type="button" class="btn mt-3">Купить</button>
               </p>
             </div>
           </div>
@@ -169,6 +170,10 @@ export default {
 </script>
 
 <style scoped>
+.btn {
+  background-color: #eeebe6;
+  color: #333333;
+}
 .card-text {
   font-size: large;
 }
@@ -194,9 +199,6 @@ export default {
   background: url(https://img.icons8.com/ios/64/000000/search--v1.png) no-repeat;
   background-size: contain;
   margin: 0.35em;
-}
-.top {
-  margin-top: 1em;
 }
 .form-select-sm {
   font-size: medium;
