@@ -34,7 +34,7 @@
         </g>
       </g></svg
   ></a>
-  <app-header :show="show" @show-change="show = !show"></app-header>
+  <app-header :show="show" @show-change="openWishlist"></app-header>
   <app-wishlist
     :show="show"
     :wishlist="wishlist"
@@ -42,6 +42,11 @@
     @over="over"
     @substract-count="substractCount"
     @delete-from-wish="deleteFromWish"
+    :is-order-send="isOrderSend"
+    @order-send="
+      isOrderSend = true;
+      wishlist.length = 0;
+    "
   ></app-wishlist>
   <app-aboutme></app-aboutme>
   <app-products :products="products"></app-products>
@@ -94,6 +99,7 @@ export default {
           price: 670,
         },
       ],
+      isOrderSend: false,
       wishlist: [],
     };
   },
@@ -105,6 +111,10 @@ export default {
     this.wishlist.forEach((x) => (x.count = 1));
   },
   methods: {
+    openWishlist() {
+      this.isOrderSend = false;
+      this.show = !this.show;
+    },
     handleScroll() {
       this.showScroll = window.scrollY > 400;
     },

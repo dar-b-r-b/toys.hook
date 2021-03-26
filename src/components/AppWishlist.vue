@@ -1,5 +1,5 @@
 <template>
-  <div id="demo">
+  <div id="wishlist">
     <transition name="slide-fade">
       <div class="overlay" v-if="show"></div>
     </transition>
@@ -7,7 +7,7 @@
     <transition name="slide-fade">
       <aside class="fix-right overflow-auto pb-4" v-if="show">
         <div class="img-close d-flex mb-3">
-          <h2>КОРЗИНА</h2>
+          <h2 class="text-uppercase">корзина</h2>
           <button class="outline-none" @click="$emit('show-change')">
             <img
               src="https://img.icons8.com/ios/50/000000/delete-sign--v1.png"
@@ -15,143 +15,168 @@
             />
           </button>
         </div>
-        <div class="wishlist-product">
-          <template v-for="product in wishlist" :key="product">
-            <div
-              @mouseover="$emit('over', product, true)"
-              @mouseleave="$emit('over', product, false)"
-            >
-              <img
-                src="image/bear.jpg"
-                height="16"
-                width="16"
-                alt="фотография"
-                class="img-product"
-              />
-            </div>
-            <div
-              @mouseover="$emit('over', product, true)"
-              @mouseleave="$emit('over', product, false)"
-              class="des-text"
-            >
-              <p>
-                {{ product.description.materials }},
-                {{ product.description.size }} см
-              </p>
-              <h3 class="des-name" v-text="product.name"></h3>
-            </div>
-            <div
-              @mouseover="$emit('over', product, true)"
-              @mouseleave="$emit('over', product, false)"
-              class="control-div"
-            >
-              <div class="counter d-flex" :class="{ collapse: !product.over }">
-                <button
-                  class="outline-none"
-                  @click="$emit('substract-count', product)"
+        <div v-if="!isOrderSend && wishlist.length">
+          <div class="wishlist-product">
+            <template v-for="product in wishlist" :key="product">
+              <div
+                @mouseover="$emit('over', product, true)"
+                @mouseleave="$emit('over', product, false)"
+              >
+                <img
+                  src="image/bear.jpg"
+                  height="16"
+                  width="16"
+                  alt="фотография"
+                  class="img-product"
+                />
+              </div>
+              <div
+                @mouseover="$emit('over', product, true)"
+                @mouseleave="$emit('over', product, false)"
+                class="des-text"
+              >
+                <p>
+                  {{ product.description.materials }},
+                  {{ product.description.size }} см
+                </p>
+                <h3 class="des-name" v-text="product.name"></h3>
+              </div>
+              <div
+                @mouseover="$emit('over', product, true)"
+                @mouseleave="$emit('over', product, false)"
+                class="control-div"
+              >
+                <div
+                  class="counter d-flex"
+                  :class="{ collapse: !product.over }"
                 >
-                  -
-                </button>
-                <span v-text="product.count"></span>
-                <button class="outline-none" @click="product.count++">+</button>
+                  <button
+                    class="outline-none"
+                    @click="$emit('substract-count', product)"
+                  >
+                    -
+                  </button>
+                  <span v-text="product.count"></span>
+                  <button class="outline-none" @click="product.count++">
+                    +
+                  </button>
+                </div>
+                <div class="del d-flex" :class="{ collapse: !product.over }">
+                  <button
+                    class="outline-none"
+                    @click="$emit('delete-from-wish', i)"
+                  >
+                    <img
+                      src="https://img.icons8.com/ios/50/000000/delete-sign--v1.png"
+                      class="del-btn"
+                    />
+                  </button>
+                </div>
+                <div class="des-price d-flex">
+                  <span
+                    v-text="product.price * product.count + ' &#8381;'"
+                  ></span>
+                </div>
               </div>
-              <div class="del d-flex" :class="{ collapse: !product.over }">
-                <button
-                  class="outline-none"
-                  @click="$emit('delete-from-wish', i)"
-                >
-                  <img
-                    src="https://img.icons8.com/ios/50/000000/delete-sign--v1.png"
-                    class="del-btn"
-                  />
-                </button>
-              </div>
-              <div class="des-price d-flex">
-                <span
-                  v-text="product.price * product.count + ' &#8381;'"
-                ></span>
-              </div>
-            </div>
-          </template>
-        </div>
+            </template>
+          </div>
 
-        <div class="delivery-inform">
-          <h4 class="mb-3">информация о доставке</h4>
-          <div class="form-horizontal col-11">
-            <div class="row">
-              <div class="form-group col-12">
-                <label for="full-name">ФИО получателя</label>
-                <input class="form-control" type="text" id="full-name" />
+          <div class="delivery-inform">
+            <h4 class="mb-3">информация о доставке</h4>
+            <div class="form-horizontal col-11">
+              <div class="row">
+                <div class="form-group col-12">
+                  <label for="full-name">ФИО получателя</label>
+                  <input class="form-control" type="text" id="full-name" />
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-6">
-                <label for="city">город</label>
-                <input class="form-control" type="text" id="city" />
+              <div class="row">
+                <div class="form-group col-6">
+                  <label for="city">город</label>
+                  <input class="form-control" type="text" id="city" />
+                </div>
+                <div class="form-group col-6">
+                  <label for="street">улица</label>
+                  <input class="form-control" type="text" id="street" />
+                </div>
               </div>
-              <div class="form-group col-6">
-                <label for="street">улица</label>
-                <input class="form-control" type="text" id="street" />
+              <div class="row">
+                <div class="form-group col-3">
+                  <label for="build">дом</label>
+                  <input class="form-control" type="text" id="build" />
+                </div>
+                <div class="form-group col-3">
+                  <label for="apartment">квартира</label>
+                  <input class="form-control" type="text" id="apartment" />
+                </div>
+                <div class="form-group col-3">
+                  <label name="postcode">индекс</label>
+                  <input class="form-control" type="text" id="postcode" />
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="form-group col-3">
-                <label for="build">дом</label>
-                <input class="form-control" type="text" id="build" />
+              <div class="form-group col-7">
+                <label for="full-name">номер телефона</label>
+                <input class="form-control" type="text" id="phone" />
               </div>
-              <div class="form-group col-3">
-                <label for="apartment">квартира</label>
-                <input class="form-control" type="text" id="apartment" />
+              <h5 class="pt-3">способ доставки</h5>
+              <div class="row">
+                <label class="d-block">
+                  <input
+                    type="radio"
+                    value="400"
+                    name="radio-button"
+                    v-model.number="deliveryCost"
+                  />
+                  <span class="px-1">почта (400 &#8381;)</span>
+                </label>
+                <label class="d-block">
+                  <input
+                    type="radio"
+                    value="300"
+                    name="radio-button"
+                    v-model.number="deliveryCost"
+                  />
+                  <span class="px-1">такси (300 &#8381;)</span>
+                </label>
+                <label class="d-block">
+                  <input
+                    type="radio"
+                    value="0"
+                    name="radio-button"
+                    v-model.number="deliveryCost"
+                  />
+                  <span class="px-1">самовывоз (бесценно)</span>
+                </label>
+                <hr class="my-3" />
+                <div class="row mb-4">
+                  <div class="col-8"></div>
+                  <div class="col text-end">
+                    <h3 class="col">итого</h3>
+                    <h3 class="col">{{ sum }} &#8381;</h3>
+                  </div>
+                </div>
               </div>
-              <div class="form-group col-3">
-                <label name="postcode">индекс</label>
-                <input class="form-control" type="text" id="postcode" />
-              </div>
-            </div>
-            <h5 class="pt-3">способ доставки</h5>
-            <div class="row">
-              <label class="d-block">
-                <input
-                  type="radio"
-                  value="400"
-                  name="radio-button"
-                  v-model.number="deliveryCost"
-                />
-                <span class="px-1">почта (400 &#8381;)</span>
-              </label>
-              <label class="d-block">
-                <input
-                  type="radio"
-                  value="300"
-                  name="radio-button"
-                  v-model.number="deliveryCost"
-                />
-                <span class="px-1">такси (300 &#8381;)</span>
-              </label>
-              <label class="d-block">
-                <input
-                  type="radio"
-                  value="0"
-                  name="radio-button"
-                  v-model.number="deliveryCost"
-                />
-                <span class="px-1">самовывоз (бесценно)</span>
-              </label>
-              <hr class="my-3" />
-              <div class="row mb-4">
-                <div class="col-8"></div>
-                <div class="col text-end">
-                  <h3 class="col">итого</h3>
-                  <h3 class="col">{{ sum }} &#8381;</h3>
+              <div class="row">
+                <div class="d-flex justify-content-center">
+                  <button class="btn" @click="$emit('order-send')">
+                    Сделать заказ
+                  </button>
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="d-flex justify-content-center">
-                <button class="btn">Сделать заказ</button>
-              </div>
-            </div>
           </div>
+        </div>
+        <div v-else-if="!isOrderSend" class="text-center mt-10">
+          <p class="fs-5">Здесь ничего нет. Сделайте первый заказ :)</p>
+          <img src="image/basket.png" class="mt-3" />
+        </div>
+        <div class="text-center" v-else>
+          <img src="image/sendOrder.png" class="mt-5" />
+
+          <p class="mt-3 fw-bold fs-4">
+            Номер вашего заказа {{ Math.floor(Math.random() * 1000 + 1) }}
+          </p>
+          <p class="fs-5">Ожидайте сообщение с информацией о доставке :)</p>
         </div>
       </aside>
     </transition>
@@ -173,11 +198,14 @@ export default {
       );
     },
   },
-  props: ["wishlist", "show"],
+  props: ["wishlist", "show", "isOrderSend"],
 };
 </script>
 
 <style scoped>
+.mt-10 {
+  margin-top: 9rem;
+}
 .btn {
   background-color: #eae6e1;
   color: #333333;
