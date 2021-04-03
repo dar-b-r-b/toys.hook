@@ -17,7 +17,7 @@
         </div>
         <div v-if="!isOrderSend && wishlist.length">
           <div class="wishlist-product">
-            <template v-for="product in wishlist" :key="product">
+            <template v-for="product in wishlist" :key="product.id">
               <div
                 @mouseover="$emit('over', product, true)"
                 @mouseleave="$emit('over', product, false)"
@@ -36,10 +36,10 @@
                 class="des-text"
               >
                 <p>
-                  {{ product.description.materials }},
+                  {{ product.description.material }},
                   {{ product.description.size }} см
                 </p>
-                <h3 class="des-name" v-text="product.name"></h3>
+                <h3 class="des-name" v-text="product.description.name"></h3>
               </div>
               <div
                 @mouseover="$emit('over', product, true)"
@@ -74,7 +74,9 @@
                 </div>
                 <div class="des-price d-flex">
                   <span
-                    v-text="product.price * product.count + ' &#8381;'"
+                    v-text="
+                      product.description.price * product.count + ' &#8381;'
+                    "
                   ></span>
                 </div>
               </div>
@@ -193,8 +195,10 @@ export default {
   computed: {
     sum() {
       return (
-        this.wishlist.reduce((aggr, x) => aggr + x.count * x.price, 0) +
-        Number(this.deliveryCost)
+        this.wishlist.reduce(
+          (aggr, x) => aggr + x.count * x.description.price,
+          0
+        ) + Number(this.deliveryCost)
       );
     },
   },

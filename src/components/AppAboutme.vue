@@ -12,7 +12,7 @@
           вдохновением. Я буду рада поделиться ими с вами.
         </p>
       </div>
-      <div class="col-4">
+      <div class="col-4 ps-4">
         <img src="image/aboutme.jpg" alt="обо мне" id="photo" />
       </div>
       <div class="col"></div>

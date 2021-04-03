@@ -49,7 +49,10 @@
     "
   ></app-wishlist>
   <app-aboutme></app-aboutme>
-  <app-products :products="products"></app-products>
+  <app-products
+    :products="products"
+    @add-to-wishlist="addToWishlist"
+  ></app-products>
   <app-delivery></app-delivery>
   <app-mc></app-mc>
   <app-footer></app-footer>
@@ -63,48 +66,25 @@ import AppProducts from "@/components/AppProducts";
 import AppDelivery from "@/components/AppDelivery";
 import AppMc from "@/components/AppMc";
 import AppFooter from "@/components/AppFooter";
+import axios from "axios";
 
 export default {
   data() {
     return {
       showScroll: false,
       showWishlist: true,
-      products: [
-        {
-          name: "мишка",
-          description: {
-            materials: "шерсть",
-            weight: 54.21,
-            size: 12,
-          },
-          price: 430,
-          showButton: false,
-        },
-        {
-          name: "зайка",
-          description: {
-            materials: "шерсть",
-            weight: 24.11,
-            size: 22,
-          },
-          price: 390,
-        },
-        {
-          name: "коралина",
-          description: {
-            materials: "акрил",
-            weight: 24.31,
-            size: 26,
-          },
-          price: 670,
-        },
-      ],
+      products: [],
       isOrderSend: false,
       wishlist: [],
     };
   },
-  mounted() {
+  async mounted() {
     window.addEventListener("scroll", this.handleScroll);
+    const { data } = await axios.get(
+      "https://toys-hook-default-rtdb.firebaseio.com/products.json"
+    );
+    this.products = data;
+
     this.wishlist.push({ ...this.products[0] });
     this.wishlist.push({ ...this.products[1] });
 
@@ -128,6 +108,12 @@ export default {
     },
     deleteFromWish(i) {
       this.wishlist.splice(i, 1);
+    },
+    addToWishlist(product) {
+      const current = this.wishlist.find((x) => x.id === product.id);
+      if (current) {
+        current.count++;
+      } else this.wishlist.push({ count: 1, ...product });
     },
   },
   computed: {

@@ -81,24 +81,70 @@
         <div class="row">
           <div
             v-for="product in computedProducts"
-            :key="product"
-            class="mx-2 col-2 card"
+            :key="product.id"
+            class="mx-2 col-2 card mb-3"
             style="width: 15rem"
           >
-            <img class="card-img-top" alt="..." />
+            <div class="d-flex justify-content-center">
+              <img
+                :src="product.image"
+                class="card-img-top mt-2"
+                alt="Изображение продукта"
+                style="width: 80%"
+              />
+            </div>
+
             <div class="card-body">
-              <h5 class="card-title text-center" v-text="product.name"></h5>
+              <h5
+                class="card-title text-center"
+                v-text="product.description.name"
+              ></h5>
               <p class="text-center">
-                <span v-text="product.description.materials"></span>,
+                <span v-text="product.description.material"></span>,
                 <span v-text="product.description.size"></span>&nbsp;см <br />
-                <span v-text="product.price"></span>&nbsp;&#8381;
+                <span v-text="product.description.price"></span>&nbsp;&#8381;
               </p>
 
               <p class="text-center">
-                <button type="button" class="btn mt-3">Купить</button>
+                <button
+                  type="button"
+                  class="btn mt-3"
+                  @click="$emit('add-to-wishlist', product)"
+                  data-bs-toggle="modal"
+                  data-bs-target="#added"
+                >
+                  Купить
+                </button>
               </p>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="modal fade"
+    id="added"
+    tabindex="-1"
+    aria-labelledby="addedToWishlist"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="d-flex justify-content-end me-2 mt-2">
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body text-center">
+          <p>Товар добавлен в корзину</p>
+          <img
+            src="https://img.icons8.com/ios/50/000000/ok--v1.png"
+            style="size: 100%"
+          />
         </div>
       </div>
     </div>
@@ -129,29 +175,33 @@ export default {
   computed: {
     computedProducts() {
       let filtered = this.products.filter((x) =>
-        x.name.toUpperCase().includes(this.searchText.toUpperCase())
+        x.description.name.toUpperCase().includes(this.searchText.toUpperCase())
       );
 
       const priceMin = parseFloat(this.filterPriceMin);
       if (priceMin) {
-        filtered = filtered.filter((x) => x.price >= priceMin);
+        filtered = filtered.filter((x) => x.description.price >= priceMin);
       }
       const priceMax = parseFloat(this.filterPriceMax);
       if (priceMax) {
-        filtered = filtered.filter((x) => x.price <= priceMax);
+        filtered = filtered.filter((x) => x.description.price <= priceMax);
       }
 
       if (this.filterMaterials)
         filtered = filtered.filter(
           (x) =>
-            x.description.materials.toUpperCase() ===
+            x.description.material.toUpperCase() ===
             this.filterMaterials.toUpperCase()
         );
       switch (this.sortType) {
         case "1":
-          return filtered.sort((x, y) => y.price - x.price);
+          return filtered.sort(
+            (x, y) => y.description.price - x.description.price
+          );
         case "2":
-          return filtered.sort((x, y) => x.price - y.price);
+          return filtered.sort(
+            (x, y) => x.description.price - y.description.price
+          );
         case "3":
           return filtered.sort(
             (x, y) => y.description.size - x.description.size
