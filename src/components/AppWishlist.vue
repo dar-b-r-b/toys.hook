@@ -89,36 +89,71 @@
               <div class="row">
                 <div class="form-group col-12">
                   <label for="full-name">ФИО получателя</label>
-                  <input class="form-control" type="text" id="full-name" />
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="full-name"
+                    v-model="fullName"
+                  />
                 </div>
               </div>
               <div class="row">
                 <div class="form-group col-6">
                   <label for="city">город</label>
-                  <input class="form-control" type="text" id="city" />
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="city"
+                    v-model="city"
+                  />
                 </div>
                 <div class="form-group col-6">
                   <label for="street">улица</label>
-                  <input class="form-control" type="text" id="street" />
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="street"
+                    v-model="street"
+                  />
                 </div>
               </div>
               <div class="row">
                 <div class="form-group col-3">
                   <label for="build">дом</label>
-                  <input class="form-control" type="text" id="build" />
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="build"
+                    v-model="build"
+                  />
                 </div>
                 <div class="form-group col-3">
                   <label for="apartment">квартира</label>
-                  <input class="form-control" type="text" id="apartment" />
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="apartment"
+                    v-model="apartment"
+                  />
                 </div>
                 <div class="form-group col-3">
                   <label name="postcode">индекс</label>
-                  <input class="form-control" type="text" id="postcode" />
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="postcode"
+                    v-model="postcode"
+                  />
                 </div>
               </div>
               <div class="form-group col-7">
                 <label for="full-name">номер телефона</label>
-                <input class="form-control" type="text" id="phone" />
+                <input
+                  class="form-control"
+                  type="text"
+                  id="phone"
+                  v-model="phone"
+                />
               </div>
               <h5 class="pt-3">способ доставки</h5>
               <div class="row">
@@ -160,7 +195,7 @@
               </div>
               <div class="row">
                 <div class="d-flex justify-content-center">
-                  <button class="btn" @click="$emit('order-send')">
+                  <button class="btn" @click="postOrder()">
                     Сделать заказ
                   </button>
                 </div>
@@ -175,9 +210,7 @@
         <div class="text-center" v-else>
           <img src="image/sendOrder.png" class="mt-5" />
 
-          <p class="mt-3 fw-bold fs-4">
-            Номер вашего заказа {{ Math.floor(Math.random() * 1000 + 1) }}
-          </p>
+          <p class="mt-3 fw-bold fs-4">Номер вашего заказа {{ orderId }}</p>
           <p class="fs-5">Ожидайте сообщение с информацией о доставке :)</p>
         </div>
       </aside>
@@ -186,10 +219,13 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
       deliveryCost: 0,
+      orderId: 0,
     };
   },
   computed: {
@@ -200,6 +236,40 @@ export default {
           0
         ) + Number(this.deliveryCost)
       );
+    },
+    deliveryType() {
+      switch (this.deliveryCost) {
+        case "300":
+          return 1;
+        case "400":
+          return 2;
+        default:
+          return 0;
+      }
+    },
+  },
+  methods: {
+    async postOrder() {
+      let { data } = await axios.get(
+        "https://toys-hook-default-rtdb.firebaseio.com/orders.json"
+      );
+
+      this.orderId = data?.length ?? 0;
+      axios
+        .patch("https://toys-hook-default-rtdb.firebaseio.com/orders.json", {
+          [this.orderId]: {
+            fullName: this.fullName,
+            city: this.city,
+            street: this.street,
+            build: this.build,
+            appartment: this.appartment,
+            postcode: this.postcode,
+            phone: this.phone,
+            deliveryType: this.deliveryType,
+          },
+        })
+        .then(() => this.$emit("order-send"))
+        .catch((e) => console.log(e));
     },
   },
   props: ["wishlist", "show", "isOrderSend"],
