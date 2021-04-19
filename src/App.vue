@@ -41,12 +41,10 @@
     @show-change="show = !show"
     @over="over"
     @substract-count="substractCount"
+    @add-count="addCount"
     @delete-from-wish="deleteFromWish"
     :is-order-send="isOrderSend"
-    @order-send="
-      isOrderSend = true;
-      wishlist.length = 0;
-    "
+    @order-send="orderSend"
   ></app-wishlist>
   <app-aboutme></app-aboutme>
   <app-products
@@ -72,7 +70,7 @@ export default {
   data() {
     return {
       showScroll: false,
-      showWishlist: true,
+      showWishlist: false,
       products: [],
       isOrderSend: false,
       wishlist: [],
@@ -85,10 +83,7 @@ export default {
     );
     this.products = data;
 
-    this.wishlist.push({ ...this.products[0] });
-    this.wishlist.push({ ...this.products[1] });
-
-    this.wishlist.forEach((x) => (x.count = 1));
+    this.wishlist = JSON.parse(localStorage.getItem("wishlist"));
   },
   methods: {
     openWishlist() {
@@ -101,19 +96,32 @@ export default {
     over(product, value) {
       product.over = value;
     },
+    addCount(product) {
+      product.count++;
+      localStorage.setItem("wishlist", JSON.stringify(this.wishlist));
+    },
     substractCount(product) {
       if (product.count !== 1) {
         product.count--;
       }
+      localStorage.setItem("wishlist", JSON.stringify(this.wishlist));
+    },
+    orderSend() {
+      this.isOrderSend = true;
+      this.wishlist.length = 0;
+
+      localStorage.setItem("wishlist", JSON.stringify(this.wishlist));
     },
     deleteFromWish(i) {
       this.wishlist.splice(i, 1);
+      localStorage.setItem("wishlist", JSON.stringify(this.wishlist));
     },
     addToWishlist(product) {
       const current = this.wishlist.find((x) => x.id === product.id);
       if (current) {
         current.count++;
       } else this.wishlist.push({ count: 1, ...product });
+      localStorage.setItem("wishlist", JSON.stringify(this.wishlist));
     },
   },
   computed: {

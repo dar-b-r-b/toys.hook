@@ -23,7 +23,7 @@
                 @mouseleave="$emit('over', product, false)"
               >
                 <img
-                  src="image/bear.jpg"
+                  :src="product.image"
                   height="16"
                   width="16"
                   alt="фотография"
@@ -57,7 +57,10 @@
                     -
                   </button>
                   <span v-text="product.count"></span>
-                  <button class="outline-none" @click="product.count++">
+                  <button
+                    class="outline-none"
+                    @click="$emit('add-count', product)"
+                  >
                     +
                   </button>
                 </div>
